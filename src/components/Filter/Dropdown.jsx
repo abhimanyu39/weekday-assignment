@@ -9,13 +9,39 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-const Dropdown = ({ type, options, selected, onChange, onDelete }) => {
-  console.log(selected);
-  // const chipClick = (e) => {
-  //   console.log(e);
-  //   e.stopPropagation();
-  // };
-  console.log(options);
+const Dropdown = ({
+  type,
+  options,
+  selected,
+  onChange,
+  onDelete,
+  multiple,
+}) => {
+  console.log(selected, typeof selected);
+  const renderValue = (selected) => {
+    return (
+      <Box
+        sx={{
+          height: `auto`,
+          maxHeight: "70px",
+          padding: `4px 6px`,
+          display: "flex",
+          overflowY: `auto`,
+          flexWrap: "wrap",
+          gap: 0.5,
+        }}
+      >
+        {selected?.map((value) => (
+          <Chip key={value} label={value} sx={{ zIndex: "3" }} />
+        ))}
+      </Box>
+    );
+  };
+
+  const renderSelected = () => {
+    return <Chip key={selected} label={selected} sx={{ zIndex: "3" }} />;
+  };
+
   return (
     <>
       <Box>
@@ -32,29 +58,9 @@ const Dropdown = ({ type, options, selected, onChange, onDelete }) => {
           id="demo-multiple-name-label"
           value={selected}
           onChange={onChange}
-          renderValue={(selected) => (
-            <Box
-              sx={{
-                height: `auto`,
-                maxHeight: "70px",
-                padding: `4px 6px`,
-                display: "flex",
-                overflowY: `auto`,
-                flexWrap: "wrap",
-                gap: 0.5,
-              }}
-            >
-              {selected.map((value) => (
-                <Chip
-                  key={value}
-                  label={value}
-                  // onClick={chipClick}
-                  // onDelete={onDelete}
-                  sx={{ zIndex: "3" }}
-                />
-              ))}
-            </Box>
-          )}
+          renderValue={
+            typeof selected === "object" ? renderValue : renderSelected
+          }
           sx={{
             height: `auto`,
             maxHeight: "100px",
@@ -63,30 +69,19 @@ const Dropdown = ({ type, options, selected, onChange, onDelete }) => {
             margin: `0 20px`,
             border: `rgb(204, 204, 204)`,
           }}
-          multiple
+          multiple={multiple ?? false}
         >
           {options &&
             options.map((name) => (
               <MenuItem
                 key={name}
                 value={name}
-                // style={getStyles(name, personName, theme)}
               >
                 {name}
               </MenuItem>
             ))}
         </Select>
       </Box>
-      {/* <Box
-        display={"inline-block"}
-        maxWidth={200}
-        border={`1px solid black`}
-        borderRadius={1}
-        borderColor={`rgb(204, 204, 204)`}
-      >
-        {type}
-        <IconButton></IconButton>
-      </Box> */}
     </>
   );
 };

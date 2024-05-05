@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   role: [],
-  experience: [],
-  salary: undefined,
-  name: undefined,
+  experience: "",
+  salary: "",
+  name: "",
 };
 
 export const filterSlice = createSlice({
@@ -12,22 +12,22 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     updateFilter: (state, action) => {
-      console.log(action);
-      switch (action.type) {
+      const { payload } = action;
+      switch (payload.type) {
         case "ROLE":
-          state.role = action.payload;
+          state.role = payload.payload;
           break;
 
         case "EXPERIENCE":
-          state.experience = action.payload;
+          state.experience = payload.payload;
           break;
 
         case "SALARY":
-          state.salary = action.payload;
+          state.salary = payload.payload;
           break;
 
         case "NAME":
-          state.name = action.payload;
+          state.name = payload.payload;
           break;
 
         default:

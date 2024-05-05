@@ -1,15 +1,23 @@
 import { useState } from "react";
 import { Box, InputLabel, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilter } from "../../redux/filterSlicer";
 
 const CompanyName = () => {
-  const [name, setName] = useState("");
+  const dispatch = useDispatch();
+  const name = useSelector((state) => state.filters.name);
 
   const handleChange = (event) => {
     event.stopPropagation();
     const {
       target: { value },
     } = event;
-    setName(value);
+
+    const action = {
+      type: "NAME",
+      payload: value,
+    };
+    dispatch(updateFilter(action));
   };
 
   return (

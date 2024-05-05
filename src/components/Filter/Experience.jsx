@@ -1,26 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropdown from "./Dropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilter } from "../../redux/filterSlicer";
+
+const experience = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 const Experience = () => {
-  const experience = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  const [selected, setSelected] = useState([]);
+  const dispatch = useDispatch();
+  const selectedExperience = useSelector((state) => state.filters?.experience);
 
   const handleChange = (event) => {
     event.stopPropagation();
     const {
       target: { value },
     } = event;
-    setSelected(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
 
+    const action = {
+      type: "EXPERIENCE",
+      payload: value,
+    };
+    dispatch(updateFilter(action));
+  };
+  useEffect(() => {
+    console.log(selectedExperience);
+  }, [selectedExperience]);
   return (
     <Dropdown
       type="Experience"
       options={experience}
-      selected={selected}
+      selected={selectedExperience}
       onChange={handleChange}
     />
   );

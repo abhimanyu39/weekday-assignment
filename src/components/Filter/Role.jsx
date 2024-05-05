@@ -1,26 +1,33 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilter } from "../../redux/filterSlicer";
+
+const role = ["Frontend", "Backend", "IOS", "Android", "Tech lead"];
 
 const Role = () => {
-  const role = ["Frontend", "Backend", "IOS", "Android", "Tech lead"];
-  const [selected, setSelected] = useState([]);
+  const dispatch = useDispatch();
+  const selectedRole = useSelector((state) => state.filters.role);
 
   const handleChange = (event) => {
     event.stopPropagation();
     const {
       target: { value },
     } = event;
-    setSelected(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+
+    const action = {
+      type: "ROLE",
+      payload: value,
+    };
+    dispatch(updateFilter(action));
   };
-  console.log(role);
+  console.log(selectedRole);
   return (
     <Dropdown
       type="Role"
+      multiple={true}
       options={role}
-      selected={selected}
+      selected={selectedRole}
       onChange={handleChange}
     />
   );

@@ -1,26 +1,32 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilter } from "../../redux/filterSlicer";
+
+const salary = ["10", "20", "50", "100", "200"];
 
 const Salary = () => {
-  const salary = ["10", "20", "50", "100", "200"];
-  const [selected, setSelected] = useState([]);
-
-  const selectedSalary = useSelector((state) => state.filters?.salary);
+  const dispatch = useDispatch();
+  const selectedSalary = useSelector((state) => state.filters.salary);
 
   const handleChange = (event) => {
     event.stopPropagation();
     const {
       target: { value },
     } = event;
-    setSelected(value);
+
+    const action = {
+      type: "SALARY",
+      payload: value,
+    };
+    dispatch(updateFilter(action));
   };
 
   return (
     <Dropdown
       type="No. of employees"
       options={salary}
-      selected={selected}
+      selected={selectedSalary}
       onChange={handleChange}
     />
   );

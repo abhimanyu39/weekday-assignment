@@ -4,10 +4,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <Box
-        height={"auto"}
+        height={"100vh"}
         width={"auto"}
-        m={4}
-        sx={{ border: "2px solid grey" }}
+        m={2}
       >
         {children}
       </Box>
