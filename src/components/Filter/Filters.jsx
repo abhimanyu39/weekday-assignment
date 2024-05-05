@@ -1,12 +1,16 @@
 import { Box } from "@mui/material";
 import Role from "./Role";
-import EmployeeCount from "./EmployeeCount";
+import Salary from "./Salary";
+import Experience from "./Experience";
+import CompanyName from "./CompanyName";
 
 const Filters = () => {
   return (
-    <Box>
+    <Box display={"flex"}>
       <Role />
-      <EmployeeCount />
+      <Salary />
+      <Experience />
+      <CompanyName />
     </Box>
   );
 };

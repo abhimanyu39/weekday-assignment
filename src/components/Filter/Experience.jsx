@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 
-const EmployeeCount = () => {
-  const employeeCount = ["1-10", "11-20", "21-50", "51-100", "101-200"];
+const Experience = () => {
+  const experience = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const [selected, setSelected] = useState([]);
 
   const handleChange = (event) => {
@@ -18,12 +18,12 @@ const EmployeeCount = () => {
 
   return (
     <Dropdown
-      type="No. of employees"
-      options={employeeCount}
+      type="Experience"
+      options={experience}
       selected={selected}
       onChange={handleChange}
     />
   );
 };
 
-export default EmployeeCount;
+export default Experience;

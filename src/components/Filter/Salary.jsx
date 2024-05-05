@@ -1,29 +1,29 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
+import { useSelector } from "react-redux";
 
-const Role = () => {
-  const role = ["Frontend", "Backend", "IOS", "Android", "Tech lead"];
+const Salary = () => {
+  const salary = ["10", "20", "50", "100", "200"];
   const [selected, setSelected] = useState([]);
+
+  const selectedSalary = useSelector((state) => state.filters?.salary);
 
   const handleChange = (event) => {
     event.stopPropagation();
     const {
       target: { value },
     } = event;
-    setSelected(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    setSelected(value);
   };
-  console.log(role);
+
   return (
     <Dropdown
-      type="Role"
-      options={role}
+      type="No. of employees"
+      options={salary}
       selected={selected}
       onChange={handleChange}
     />
   );
 };
 
-export default Role;
+export default Salary;

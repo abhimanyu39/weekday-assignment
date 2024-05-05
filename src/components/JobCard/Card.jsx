@@ -2,7 +2,7 @@ import { Avatar, Box } from "@mui/material";
 import Pill from "./Pill";
 import { ApplyButton } from "../Reusables/applyButton";
 
-const Card = () => {
+const Card = ({ job }) => {
   return (
     <Box
       m={1}
@@ -20,9 +20,7 @@ const Card = () => {
         alignItems={"center"}
         gap={1}
       >
-        <Avatar m={1} alt="Example">
-          B
-        </Avatar>
+        <Avatar m={1} alt="Example" src={job.logoUrl}></Avatar>
         <Box>
           <Box
             sx={{
@@ -33,16 +31,19 @@ const Card = () => {
               color: `#8b8b8b`,
             }}
           >
-            Company
+            {job.companyName}
           </Box>
-          <Box sx={{ fontSize: `13px`, lineHeight: "1.5" }}>Company</Box>
+          <Box sx={{ fontSize: `13px`, lineHeight: "1.5" }}>{job.jobRole}</Box>
           <Box mt={1} sx={{ fontSize: `11px`, fontWeight: "500" }}>
-            Company
+            {job.location}
           </Box>
         </Box>
       </Box>
       <Box mb={2} component={"section"}>
-        Estimated Salary:
+        Estimated Salary: {job.salaryCurrencyCode === "USD" ? "$" : ""}
+        {`${job.minJdSalary ?? 0}k`} -{" "}
+        {job.salaryCurrencyCode === "USD" ? "$" : ""}
+        {`${job.maxJdSalary ?? 0}k`}
       </Box>
       <Box sx={{ fontSize: `1rem`, lineHeight: `1.5`, fontWeight: `500` }}>
         About Company:
@@ -58,17 +59,11 @@ const Card = () => {
           maskImage: `linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255), rgba(255, 255, 255, 0))`,
         }}
       >
-        At Pinch, our dream is to transform the home ecosystem around families
-        and help them create space for the truly important things, allowing them
-        to focus on themselves and their well-being to build meaningful lives,
-        filled with purpose and joy.At Pinch, our dream is to transform the home
-        ecosystem around families and help them create space for the truly
-        important things, allowing them to focus on themselves and their
-        well-being to build meaningful lives, filled with purpose and joy.
+        {job.jobDetailsFromCompany}
       </Box>
       <Box mb={1} display={"flex"} justifyContent={"center"}>
         <a
-          href=""
+          href={job.jdLink}
           style={{
             cursor: `pointer`,
             color: `rgb(73, 67, 218)`,
@@ -92,7 +87,13 @@ const Card = () => {
         >
           Minimum Experience
         </Box>
-        <Box>4 years</Box>
+        <Box>
+          {job.minExp && job.maxExp
+            ? `${job.minExp} - ${job.maxExp} years`
+            : job.minExp || job.maxExp
+            ? `${job.minExp || job.maxExp} years`
+            : "Freshers"}
+        </Box>
       </Box>
       <ApplyButton>Easy Apply</ApplyButton>
     </Box>

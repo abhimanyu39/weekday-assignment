@@ -13,7 +13,22 @@ const Content = () => {
   return (
     <Box m={2} p={1} component={"main"} display={"flex"} flexWrap={"wrap"}>
       {jobList?.map((job) => {
-        return <Card key={job.jdUid} job={job} />;
+        return (
+          <Box
+            key={job.jdUid}
+            sx={{
+              flexBasis: `33.3333%`,
+              flexGrow: 0,
+              maxWidth: `33.3333%`,
+              "@media (max-width: 900px)": {
+                flexBasis: `50%`,
+                maxWidth: `50%`,
+              },
+            }}
+          >
+            <Card job={job} />
+          </Box>
+        );
       })}
     </Box>
   );
