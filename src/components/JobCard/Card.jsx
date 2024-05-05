@@ -1,15 +1,16 @@
-import { Avatar, Box, Button, Chip } from "@mui/material";
+import { Avatar, Box } from "@mui/material";
 import Pill from "./Pill";
+import { ApplyButton } from "../Reusables/applyButton";
 
 const Card = () => {
   return (
     <Box
       m={1}
       p={2}
-      height={430}
-      maxWidth={280}
+      height={514}
+      maxWidth={290}
       borderRadius={5}
-      boxShadow={`rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important`}
+      boxShadow={`rgba(0, 0, 0, 0.25) 0px 1px 4px 0px`}
     >
       <Pill text="Posted 12 days ago" />
       <Box
@@ -40,7 +41,9 @@ const Card = () => {
           </Box>
         </Box>
       </Box>
-      <Box component={"section"}>Estimated Salary:</Box>
+      <Box mb={2} component={"section"}>
+        Estimated Salary:
+      </Box>
       <Box sx={{ fontSize: `1rem`, lineHeight: `1.5`, fontWeight: `500` }}>
         About Company:
       </Box>
@@ -63,7 +66,7 @@ const Card = () => {
         important things, allowing them to focus on themselves and their
         well-being to build meaningful lives, filled with purpose and joy.
       </Box>
-      <Box display={"flex"} justifyContent={"center"}>
+      <Box mb={1} display={"flex"} justifyContent={"center"}>
         <a
           href=""
           style={{
@@ -77,7 +80,21 @@ const Card = () => {
           View Job
         </a>
       </Box>
-      <Button>Easy Apply</Button>
+      <Box mb={1} component={"section"}>
+        <Box
+          sx={{
+            fontSize: `13px`,
+            fontWeight: `600`,
+            letterSpacing: `1px`,
+            marginBottom: `3px`,
+            color: `#8b8b8b`,
+          }}
+        >
+          Minimum Experience
+        </Box>
+        <Box>4 years</Box>
+      </Box>
+      <ApplyButton>Easy Apply</ApplyButton>
     </Box>
   );
 };
